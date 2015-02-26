@@ -4,12 +4,15 @@ namespace Padam87\AttributeBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class OptionType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name', 'text', array());
+        $builder
+            ->add('name')
+            ->add('value');
     }
 
     public function getName()

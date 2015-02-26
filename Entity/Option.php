@@ -25,6 +25,12 @@ class Option
     protected $name;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     * @var string
+     */
+    protected $value;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Definition", inversedBy="options")
      * @ORM\JoinColumn(name="definition_id", referencedColumnName="id")
      * @var AttributeDefinition
@@ -62,6 +68,18 @@ class Option
     public function getName()
     {
         return $this->name;
+    }
+
+    public function getValue()
+    {
+        return $this->value;
+    }
+
+    public function setValue($value)
+    {
+        $this->value = $value;
+
+        return $this;
     }
 
     /**
