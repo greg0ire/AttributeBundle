@@ -13,6 +13,8 @@ trait AttributedEntityTrait
      */
     private $attributes;
 
+    private $areAttributesLoaded = false;
+
     /**
      * Add attributes
      *
@@ -42,6 +44,21 @@ trait AttributedEntityTrait
      */
     public function getAttributes()
     {
+        $this->loadAttributes();
         return $this->attributes;
+    }
+
+    public function setAttributeLoader($loader)
+    {
+        $this->loader = $loader;
+    }
+
+    public function loadAttributes()
+    {
+        if (!$this->areAttributesLoaded) {
+            $this->loader->load($this);
+        }
+
+        $this->areAttributesLoaded = true;
     }
 }
