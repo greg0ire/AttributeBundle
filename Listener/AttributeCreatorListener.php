@@ -17,6 +17,7 @@ class AttributeCreatorListener
 {
     public function postLoad(LifecycleEventArgs $eventArgs)
     {
+        return;
         $em = $eventArgs->getEntityManager();
         $uow = $em->getUnitOfWork();
         $entity = $eventArgs->getEntity();
@@ -26,12 +27,18 @@ class AttributeCreatorListener
 
         if ($reader->getClassAnnotation($refl, 'Padam87\AttributeBundle\Annotation\Entity') != null) {
             try {
-                $schema = $em->getRepository('Padam87AttributeBundle:Schema')->findOneBy(array(
-                    'className' => $refl->getName()
-                ));
+                /* $schema = $em->getRepository('Padam87AttributeBundle:Schema')->findOneBy(array( */
+                /*     'className' => $refl->getName() */
+                /* )); */
+                $schema = array(
+                    $entity->getLibrary()->getDefinition1(),
+                    $entity->getLibrary()->getDefinition2(),
+                );
 
-                if ($schema !== null) {
-                    foreach ($schema->getDefinitions() as $definition) {
+                $schema = array_filter($schema);
+
+                if (count($schema)) {
+                    foreach ($schema as $definition) {
                         $qb = $em->getRepository($refl->getName())->createQueryBuilder('main');
 
                         $qb->join('main.attributes', 'a', 'WITH', 'a.definition = :definition');

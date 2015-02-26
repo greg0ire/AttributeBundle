@@ -16,33 +16,33 @@ class SchemaCreatorListener
 {
     public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs)
     {
-        $em = $eventArgs->getEntityManager();
+        /* $em = $eventArgs->getEntityManager(); */
 
-        $metadata = $eventArgs->getClassMetadata();
-        $refl = $metadata->getReflectionClass();
+        /* $metadata = $eventArgs->getClassMetadata(); */
+        /* $refl = $metadata->getReflectionClass(); */
 
-        if ($refl === null) {
-            $refl = new \ReflectionClass($metadata->getName());
-        }
+        /* if ($refl === null) { */
+        /*     $refl = new \ReflectionClass($metadata->getName()); */
+        /* } */
 
-        $reader = new AnnotationReader();
+        /* $reader = new AnnotationReader(); */
 
-        if ($reader->getClassAnnotation($refl, 'Padam87\AttributeBundle\Annotation\Entity') != null) {
-            try {
-                $schema = $em->getRepository('Padam87AttributeBundle:Schema')->findOneBy(array(
-                    'className' => $metadata->getName()
-                ));
+        /* if ($reader->getClassAnnotation($refl, 'Padam87\AttributeBundle\Annotation\Entity') != null) { */
+        /*     try { */
+        /*         $schema = $em->getRepository('Padam87AttributeBundle:Schema')->findOneBy(array( */
+        /*             'className' => $metadata->getName() */
+        /*         )); */
 
-                if ($schema === null) {
-                    $schema = new Schema();
-                    $schema->setClassName($metadata->getName());
+        /*         if ($schema === null) { */
+        /*             $schema = new Schema(); */
+        /*             $schema->setClassName($metadata->getName()); */
 
-                    $em->persist($schema);
-                    $em->flush($schema);
-                }
-            } catch (DBALException $e) {
-                // Discard DBAL exceptions in order for schema:update to work
-            }
-        }
+        /*             $em->persist($schema); */
+        /*             $em->flush($schema); */
+        /*         } */
+        /*     } catch (DBALException $e) { */
+        /*         // Discard DBAL exceptions in order for schema:update to work */
+        /*     } */
+        /* } */
     }
 }
