@@ -1,7 +1,9 @@
 {% block attributeCollection_widget %}
 {% spaceless %}
     {% for attribute in form %}
-        {{ form_row(attribute.value) }}
+        {% if attribute.children.value is defined %}
+            {{form_row(attribute.children.value)}}
+        {% endif %}
     {% endfor %}
 {% endspaceless %}
 {% endblock attributeCollection_widget %}
