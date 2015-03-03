@@ -76,6 +76,20 @@ class Definition
     private $attributes;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(type="boolean", options={"default"=true})
+     */
+    private $visibleInExport;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(type="boolean", options={"default"=true})
+     */
+    private $visibleInListing;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -324,5 +338,29 @@ class Definition
     public function getAttributes()
     {
         return $this->attributes;
+    }
+
+    public function isVisibleInListing()
+    {
+        return $this->visibleInListing;
+    }
+
+    public function setVisibleInListing($value)
+    {
+        $this->visibleInListing = $value;
+
+        return $this;
+    }
+
+    public function isVisibleInExport()
+    {
+        return $this->visibleInExport;
+    }
+
+    public function setVisibleInExport($value)
+    {
+        $this->visibleInExport = $value;
+
+        return $this;
     }
 }
